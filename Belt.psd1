@@ -15,7 +15,7 @@ Author = 'Leigh London'
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = '*'
+FunctionsToExport = @('ConvertTo-SID')
 
 # Cmdlets to export from this module
 CmdletsToExport = '*'
@@ -27,7 +27,7 @@ VariablesToExport = '*'
 AliasesToExport = '*'
 
 # List of all modules packaged with this module
-ModuleList = @('User.psm1')
+# ModuleList = @()
 
 # List of all files packaged with this module
 # FileList = @()
