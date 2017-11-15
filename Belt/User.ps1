@@ -16,3 +16,9 @@ function ConvertTo-SID {
         }
     }
 }
+
+function Fake-FunctionToTest {
+    [CmdletBinding()]
+    param([string]$t)
+    process {$t}
+}
