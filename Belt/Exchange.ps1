@@ -33,10 +33,12 @@ function Enter-ExchangeOnlineSession {
             -ConnectionUri https://outlook.office365.com/powershell-liveid/ `
             -Credential $(Get-Credential) `
             -Authentication Basic `
-            -AllowRedirection
+            -AllowRedirection `
+            -ErrorAction Stop
         Import-PSSession $session
-    } catch {
-        Write-Warning $_
+    } catch  {
+        Write-Warning "Unable to connect to Exchange"
+        Write-Error $_
         Exit
     }
 }
