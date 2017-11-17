@@ -3,3 +3,7 @@ root = true
 [*.{psm1,ps1,psd1}]
 indent_size = 4
 indent_style = space
+
+[*.md]
+indent_style = space
+indent_size = 2
