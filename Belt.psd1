@@ -15,7 +15,12 @@ Author = 'Leigh London'
 # NestedModules = @()
 
 # Functions to export from this module
-FunctionsToExport = @('ConvertTo-SID')
+FunctionsToExport = @(
+    # User
+    'ConvertTo-SID',
+    # Exchange
+    'Get-MailboxForwards'
+)
 
 # Cmdlets to export from this module
 CmdletsToExport = '*'
