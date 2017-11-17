@@ -18,6 +18,29 @@ function Get-MailboxForwards {
     }
 }
 
+<#
+.SYNOPSIS
+Connects to Exchange Online.
+
+.DESCRIPTION
+Enters a new PSSession with the Exchange Online service (Office365), prompting
+for credentials.
+#>
+function Enter-ExchangeOnlineSession {
+    try {
+        $session = New-PSSession `
+            -ConfigurationName Microsoft.Exchange `
+            -ConnectionUri https://outlook.office365.com/powershell-liveid/ `
+            -Credential $(Get-Credential) `
+            -Authentication Basic `
+            -AllowRedirection
+        Import-PSSession $session
+    } catch {
+        Write-Warning $_
+        Exit
+    }
+}
+
 function Test-ExchangeConnection {
     # test for a valid connection to exchange by looking for a cmdlet.
     $exists = [bool](Get-Command -Name Check-MailboxQuotas -ErrorAction SilentlyContinue)

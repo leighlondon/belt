@@ -3,7 +3,7 @@
 RootModule = 'Belt.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.0.2'
 
 # ID used to uniquely identify this module
 GUID = '1fff37cd-cb4d-4ac1-9ef4-323d78b7a2ce'
@@ -16,6 +16,7 @@ FunctionsToExport = @(
     # User
     'ConvertTo-SID',
     # Exchange
+    'Enter-ExchangeOnlineSession',
     'Get-MailboxForwards'
 )
 
