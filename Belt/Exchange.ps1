@@ -1,4 +1,3 @@
-
 function Test-ExchangeConnection {
     # test for a valid connection to exchange by looking for a cmdlet.
     $exists = [bool](Get-Command -Name Check-MailboxQuotas -ErrorAction SilentlyContinue)
@@ -9,6 +8,13 @@ function Test-ExchangeConnection {
     }
 }
 
+<#
+.SYNOPSIS
+List the forwards active on a mailbox.
+
+.DESCRIPTION
+Returns the ForwardingAddress and ForwardingSmtpAddress for a mailbox forward.
+#>
 function Get-MailboxForwards {
     [CmdletBinding()]
     param(
