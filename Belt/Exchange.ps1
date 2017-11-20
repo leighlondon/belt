@@ -38,8 +38,7 @@ function Enter-ExchangeOnlineSession {
         Import-PSSession $session
     } catch  {
         Write-Warning "Unable to connect to Exchange"
-        Write-Error $_
-        Exit
+        throw $_
     }
 }
 
@@ -49,6 +48,6 @@ function Test-ExchangeConnection {
     if ($exists -eq $FALSE) {
         Write-Warning "Not connected to Exchange"
         # TODO: better error handling
-        Exit
+        throw "Not connected to Exchange"
     }
 }
