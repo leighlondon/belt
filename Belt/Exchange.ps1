@@ -48,12 +48,12 @@ function Enter-ExchangeOnlineSession {
 
 <#
 .SYNOPSIS
-Disconnects from a Exchange Online remote session.
+Disconnects from (all) Exchange Online remote session(s).
 
 .DESCRIPTION
-Disconnects a remote PSSession from the Exchange Online service (Office365).
+Disconnects any remote PSSession(s) from the Exchange Online service (Office365).
 #>
-function Exit-ExchangeOnlineSession {
+function Exit-ExchangeOnlineSessions {
     Get-PSSession |
     Where {
         $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange'

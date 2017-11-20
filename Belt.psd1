@@ -17,7 +17,7 @@ FunctionsToExport = @(
     'ConvertTo-SID',
     # Exchange
     'Enter-ExchangeOnlineSession',
-    'Exit-ExchangeOnlineSession',
+    'Exit-ExchangeOnlineSessions',
     'Get-MailboxForwards'
 )
 
