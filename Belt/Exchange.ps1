@@ -28,13 +28,17 @@ for credentials.
 #>
 function Enter-ExchangeOnlineSession {
     try {
-        $session = New-PSSession `
-            -ConfigurationName Microsoft.Exchange `
-            -ConnectionUri https://outlook.office365.com/powershell-liveid/ `
-            -Credential $(Get-Credential) `
-            -Authentication Basic `
-            -AllowRedirection `
-            -ErrorAction Stop
+        $credential = Get-Credential
+        # splat the options for the new-pssession (to make it easier to read)
+        $options = @{
+            'ConfigurationName' = 'Microsoft.Exchange'
+            'ConnectionUri' = 'https://outlook.office365.com/powershell-liveid/'
+            'Credential' = $credential
+            'Authentication' = 'Basic'
+            'AllowRedirection' = $true
+            'ErrorAction' = 'Stop'
+        }
+        $session = New-PSSession @options
         Import-PSSession $session
     } catch  {
         Write-Warning "Unable to connect to Exchange"
