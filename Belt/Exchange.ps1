@@ -8,7 +8,7 @@ Returns the ForwardingAddress and ForwardingSmtpAddress for a mailbox forward.
 function Get-MailboxForwards {
     [CmdletBinding()]
     param(
-        [parameter(mandatory=$TRUE)]
+        [parameter(mandatory=$true)]
         [String]
         $mailbox
     )
@@ -41,7 +41,7 @@ function Enter-ExchangeOnlineSession {
         $session = New-PSSession @options
         Import-PSSession $session
     } catch  {
-        Write-Warning "Unable to connect to Exchange"
+        Write-Warning 'Unable to connect to Exchange'
         throw $_
     }
 }
@@ -56,7 +56,7 @@ Disconnects a remote PSSession from the Exchange Online service (Office365).
 function Exit-ExchangeOnlineSession {
     Get-PSSession |
     Where {
-        $_.ComputerName -eq "outlook.office365.com" -and $_.ConfigurationName -eq "Microsoft.Exchange"
+        $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange'
     } |
     Remove-PSSession
 }
@@ -64,9 +64,8 @@ function Exit-ExchangeOnlineSession {
 function Test-ExchangeConnection {
     # test for a valid connection to exchange by looking for a cmdlet.
     $exists = [bool](Get-Command -Name Check-MailboxQuotas -ErrorAction SilentlyContinue)
-    if ($exists -eq $FALSE) {
-        Write-Warning "Not connected to Exchange"
-        # TODO: better error handling
-        throw "Not connected to Exchange"
+    if ($exists -eq $false) {
+        Write-Warning 'Not connected to Exchange'
+        throw 'Not connected to Exchange'
     }
 }
