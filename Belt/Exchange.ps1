@@ -42,6 +42,21 @@ function Enter-ExchangeOnlineSession {
     }
 }
 
+<#
+.SYNOPSIS
+Disconnects from a Exchange Online remote session.
+
+.DESCRIPTION
+Disconnects a remote PSSession from the Exchange Online service (Office365).
+#>
+function Exit-ExchangeOnlineSession {
+    Get-PSSession |
+    Where {
+        $_.ComputerName -eq "outlook.office365.com" -and $_.ConfigurationName -eq "Microsoft.Exchange"
+    } |
+    Remove-PSSession
+}
+
 function Test-ExchangeConnection {
     # test for a valid connection to exchange by looking for a cmdlet.
     $exists = [bool](Get-Command -Name Check-MailboxQuotas -ErrorAction SilentlyContinue)
