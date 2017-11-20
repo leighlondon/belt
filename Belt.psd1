@@ -18,7 +18,9 @@ FunctionsToExport = @(
     # Exchange
     'Enter-ExchangeOnlineSession',
     'Exit-ExchangeOnlineSessions',
-    'Get-MailboxForwards'
+    'Get-MailboxForwards',
+    # Meta helpers
+    'Get-Source'
 )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess
