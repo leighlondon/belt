@@ -55,7 +55,7 @@ Disconnects any remote PSSession(s) from the Exchange Online service (Office365)
 #>
 function Exit-ExchangeOnlineSessions {
     Get-PSSession |
-    Where {
+    Where-Object {
         $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange'
     } |
     Remove-PSSession
