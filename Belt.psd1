@@ -20,7 +20,7 @@ FunctionsToExport = @(
     'Exit-ExchangeOnlineSessions',
     'Get-MailboxForwards',
     # Meta helpers
-    'Get-Source'
+    'Get-FunctionSource'
 )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess
