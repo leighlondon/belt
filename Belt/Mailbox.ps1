@@ -1,4 +1,10 @@
+<#
+.SYNOPSIS
+Resolve the numeric mailbox type to a string.
 
+.DESCRIPTION
+Returns a human-readable string translation of the exchRemoteRecipientType attribute.
+#>
 function Resolve-MailboxType {
     param([Int64]$mbox)
     $types = @{
