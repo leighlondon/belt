@@ -19,6 +19,8 @@ FunctionsToExport = @(
     'Enter-ExchangeOnlineSession',
     'Exit-ExchangeOnlineSessions',
     'Get-MailboxForwards',
+    # Mailbox
+    'Resolve-MailboxType',
     # Meta helpers
     'Get-FunctionSource'
 )
