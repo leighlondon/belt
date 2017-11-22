@@ -27,3 +27,13 @@ function Resolve-MailboxType {
     # returns a human-readable single string
     $result -Join ', '
 }
+
+function Get-MailboxType {
+    param([string]$username)
+    $type = @{
+        'Name' = 'Mailbox Type'
+        'Expression' = { Resolve-MailboxType $_.msExchRemoteRecipientType }
+    }
+    Get-ADUser $username -Properties msExchRemoteRecipientType |
+        Select-Object name, $type
+}

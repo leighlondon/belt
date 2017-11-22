@@ -21,6 +21,7 @@ FunctionsToExport = @(
     'Get-MailboxForwards',
     # Mailbox
     'Resolve-MailboxType',
+    'Get-MailboxType',
     # Meta helpers
     'Get-FunctionSource'
 )
