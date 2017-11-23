@@ -19,6 +19,19 @@ function Get-MailboxForwards {
     }
 }
 
+function Get-MailboxRules {
+    param(
+        [parameter(mandatory=$true)]
+        [String]
+        $mailbox
+    )
+    begin { Test-ExchangeConnection }
+    process {
+        Get-InboxRule -Mailbox $mailbox |
+            Select-Object -Property Name,ForwardTo,RedirectTo
+    }
+}
+
 <#
 .SYNOPSIS
 Connects to Exchange Online.
