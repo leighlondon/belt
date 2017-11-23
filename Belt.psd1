@@ -3,7 +3,10 @@
 RootModule = 'Belt.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.2'
+ModuleVersion = '0.1.0'
+
+# Minimum PowerShell version.
+PowerShellVersion = '5.0'
 
 # ID used to uniquely identify this module
 GUID = '1fff37cd-cb4d-4ac1-9ef4-323d78b7a2ce'
