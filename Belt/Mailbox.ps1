@@ -20,7 +20,7 @@ function Resolve-MailboxType {
     # use a dynamic type as temporary storage
     $result = [System.Collections.ArrayList]@()
     $types.Keys |
-        # bitwise operations to decode the type.
+        # bitwise operations to decode the type
         where { $mbox -band $_ } |
         # swallow the return value
         foreach { $_ = $result.Add($types.Get_Item($_)) }
@@ -34,6 +34,10 @@ function Get-MailboxType {
         'Name' = 'Mailbox Type'
         'Expression' = { Resolve-MailboxType $_.msExchRemoteRecipientType }
     }
-    Get-ADUser $username -Properties msExchRemoteRecipientType |
-        Select-Object name, $type
+    try {
+        Get-ADUser $username -Properties msExchRemoteRecipientType |
+            Select-Object Name, $type
+    } catch {
+        'Not found: ' + $username | Write-Warning
+    }
 }
