@@ -2,8 +2,10 @@
 # Script module or binary module file associated with this manifest
 RootModule = 'Belt.psm1'
 
+Description = 'A belt for handy tools.'
+
 # Version number of this module.
-ModuleVersion = '0.1.0'
+ModuleVersion = '0.1.1'
 
 # Minimum PowerShell version.
 PowerShellVersion = '5.0'
@@ -18,14 +20,13 @@ Author = 'Leigh London'
 FunctionsToExport = @(
     # Active Directory
     'Get-GroupMembers',
+    'Get-MailboxType',
+    'Resolve-MailboxType',
     # Exchange
     'Enter-ExchangeOnlineSession',
     'Exit-ExchangeOnlineSessions',
     'Get-MailboxForwards',
-    # Mailbox
-    'Resolve-MailboxType',
-    'Get-MailboxType',
-    # User
+    # Windows
     'ConvertTo-SID',
     # Meta helpers
     'Get-FunctionSource'
