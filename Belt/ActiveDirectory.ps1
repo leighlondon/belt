@@ -9,7 +9,7 @@ Active Directory group.
 function Get-GroupMembers {
     param([String]$group)
     try {
-        Get-ADGroupMember -Identity $group |
+        Get-ADGroupMember -Identity $group -Recursive |
             Get-ADUser -Property DisplayName |
             Select-Object Name,DisplayName
     } catch {
