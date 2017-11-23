@@ -8,8 +8,12 @@ Active Directory group.
 #>
 function Get-GroupMembers {
     param([String]$group)
-
-    Get-ADGroupMember -Identity $group |
-        Get-ADUser -Property DisplayName |
-        Select-Object Name,DisplayName
+    try {
+        Get-ADGroupMember -Identity $group |
+            Get-ADUser -Property DisplayName |
+            Select-Object Name,DisplayName
+    } catch {
+        'Group not found: ' + $group | Write-Warning
+        throw $_
+    }
 }
