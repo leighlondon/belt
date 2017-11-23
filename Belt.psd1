@@ -13,8 +13,8 @@ Author = 'Leigh London'
 
 # Functions to export from this module
 FunctionsToExport = @(
-    # User
-    'ConvertTo-SID',
+    # Active Directory
+    'Get-GroupMembers',
     # Exchange
     'Enter-ExchangeOnlineSession',
     'Exit-ExchangeOnlineSessions',
@@ -22,6 +22,8 @@ FunctionsToExport = @(
     # Mailbox
     'Resolve-MailboxType',
     'Get-MailboxType',
+    # User
+    'ConvertTo-SID',
     # Meta helpers
     'Get-FunctionSource'
 )
