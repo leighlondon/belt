@@ -1,3 +1,11 @@
+<#
+.SYNOPSIS
+Gets a list of group members.
+
+.DESCRIPTION
+Gets the "Name" and "DisplayName" properties for all members in a given
+Active Directory group.
+#>
 function Get-GroupMembers {
     param([String]$group)
 
