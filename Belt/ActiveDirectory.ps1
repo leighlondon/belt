@@ -7,8 +7,8 @@ Gets a computer object with the matching hostname from Active Directory.
 #>
 function Get-Computer {
     param([String]$computer)
-    Get-ADComputer -Filter "Name -like '*$computer*'" |
-        Select-Object Name,Enabled,DNSHostName,DistinguishedName
+    Get-ADComputer -Filter "Name -like '*$computer*'" -Properties CanonicalName |
+        Select-Object Name,Enabled,CanonicalName
 }
 
 <#
