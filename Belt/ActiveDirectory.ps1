@@ -1,5 +1,18 @@
 <#
 .SYNOPSIS
+Gets a computer object.
+
+.DESCRIPTION
+Gets a computer object with the matching hostname from Active Directory.
+#>
+function Get-Computer {
+    param([String]$computer)
+    Get-ADComputer -Filter "Name -like '*$computer*'" |
+        Select-Object Name,Enabled,DNSHostName,DistinguishedName
+}
+
+<#
+.SYNOPSIS
 Gets a list of group members.
 
 .DESCRIPTION
