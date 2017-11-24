@@ -31,17 +31,31 @@ function Get-GroupMembers {
     }
 }
 
+<#
+.SYNOPSIS
+Get the mailbox type from a User.
+
+.DESCRIPTION
+Checks the Active Directory attributes for a given user and translates the
+mailbox type into a human-readable form.
+#>
 function Get-MailboxType {
     param([string]$username)
-    $type = @{
-        'Name' = 'Mailbox Type'
-        'Expression' = { Resolve-MailboxType $_.msExchRemoteRecipientType }
+    begin {
+        $type = @{
+            'Name' = 'Mailbox Type'
+            'Expression' = { Resolve-MailboxType $_.msExchRemoteRecipientType }
+        }
     }
-    try {
-        Get-ADUser $username -Properties msExchRemoteRecipientType |
-            Select-Object Name, $type
-    } catch {
-        'Not found: ' + $username | Write-Warning
+    process {
+        try {
+            Get-ADUser $username -Properties msExchRemoteRecipientType |
+                Select-Object Name, $type
+        } catch [System.Management.Automation.CommandNotFoundException] {
+            'Missing ActiveDirectory module' | Write-Warning
+        } catch {
+            'Not found: ' + $username | Write-Warning
+        }
     }
 }
 
