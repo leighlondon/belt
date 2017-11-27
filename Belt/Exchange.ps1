@@ -53,7 +53,7 @@ function Enter-ExchangeOnlineSession {
             'ErrorAction' = 'Stop'
         }
         $session = New-PSSession @options
-        Import-PSSession $session
+        Import-Module (Import-PSSession $session)
     } catch  {
         Write-Warning 'Unable to connect to Exchange'
         throw $_
