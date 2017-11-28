@@ -22,6 +22,8 @@ FunctionsToExport = @(
     'Get-GroupMembers',
     'Get-MailboxType',
     'Resolve-MailboxType',
+    # DNS
+    'Resolve-DNS',
     # Exchange
     'Enter-ExchangeOnlineSession',
     'Exit-ExchangeOnlineSessions',
