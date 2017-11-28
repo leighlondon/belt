@@ -23,3 +23,9 @@ function ConvertTo-SID {
         }
     }
 }
+
+function Remove-NetworkPrinters {
+    Get-Printer |
+        where { $_.Type -ne "Local" } |
+        Remove-Printer
+}
