@@ -24,6 +24,13 @@ function ConvertTo-SID {
     }
 }
 
+<#
+.SYNOPSIS
+Removes all "network" printers.
+
+.DESCRIPTION
+Removes any and all printer mappings for the current user that are not "local".
+#>
 function Remove-NetworkPrinters {
     Get-Printer |
         where { $_.Type -ne "Local" } |
