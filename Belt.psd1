@@ -5,7 +5,7 @@ RootModule = 'Belt.psm1'
 Description = 'A belt for handy tools.'
 
 # Version number of this module.
-ModuleVersion = '0.1.1'
+ModuleVersion = '0.1.2'
 
 # Minimum PowerShell version.
 PowerShellVersion = '5.0'
@@ -30,6 +30,7 @@ FunctionsToExport = @(
     'Get-MailboxForwards',
     # Windows
     'ConvertTo-SID',
+    'Remove-NetworkPrinters',
     # Meta helpers
     'Get-FunctionSource'
 )
