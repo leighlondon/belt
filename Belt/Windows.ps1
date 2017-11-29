@@ -32,7 +32,10 @@ Removes all "network" printers.
 Removes any and all printer mappings for the current user that are not "local".
 #>
 function Remove-NetworkPrinters {
+    param(
+        [String]$except
+    )
     Get-Printer |
-        where { $_.Type -ne "Local" } |
+        where { $_.Type -ne "Local" -and $_.Name -notlike "*$except*" } |
         Remove-Printer
 }
