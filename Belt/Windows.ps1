@@ -33,6 +33,7 @@ Removes any and all printer mappings for the current user that are not "local".
 #>
 function Remove-NetworkPrinters {
     param(
+        [parameter()]
         [String]$except
     )
     Get-Printer |
