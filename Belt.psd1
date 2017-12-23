@@ -5,7 +5,7 @@ RootModule = 'Belt.psm1'
 Description = 'A belt for handy tools.'
 
 # Version number of this module.
-ModuleVersion = '0.1.2'
+ModuleVersion = '0.2.0'
 
 # Minimum PowerShell version.
 PowerShellVersion = '5.0'
@@ -25,8 +25,8 @@ FunctionsToExport = @(
     # DNS
     'Resolve-DNS',
     # Exchange
-    'Enter-ExchangeOnlineSession',
-    'Exit-ExchangeOnlineSessions',
+    'Connect-ExchangeOnlineSession',
+    'Disconnect-ExchangeOnlineSessions',
     'Get-MailboxForwards',
     # Windows
     'ConvertTo-SID',

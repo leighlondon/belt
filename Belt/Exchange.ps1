@@ -40,7 +40,7 @@ Connects to Exchange Online.
 Enters a new PSSession with the Exchange Online service (Office365), prompting
 for credentials.
 #>
-function Enter-ExchangeOnlineSession {
+function Connect-ExchangeOnlineSession {
     try {
         $credential = Get-Credential
         # splat the options for the new-pssession (to make it easier to read)
@@ -53,7 +53,7 @@ function Enter-ExchangeOnlineSession {
             'ErrorAction' = 'Stop'
         }
         $session = New-PSSession @options
-        Import-Module (Import-PSSession $session)
+        Import-Module (Import-PSSession $session -AllowClobber) -Global
     } catch  {
         Write-Warning 'Unable to connect to Exchange'
         throw $_
@@ -67,7 +67,7 @@ Disconnects from (all) Exchange Online remote session(s).
 .DESCRIPTION
 Disconnects any remote PSSession(s) from the Exchange Online service (Office365).
 #>
-function Exit-ExchangeOnlineSessions {
+function Disconnect-ExchangeOnlineSessions {
     Get-PSSession |
         where { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' } |
         Remove-PSSession
