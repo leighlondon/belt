@@ -41,22 +41,29 @@ Enters a new PSSession with the Exchange Online service (Office365), prompting
 for credentials.
 #>
 function Connect-ExchangeOnlineSession {
-    try {
-        $credential = Get-Credential
-        # splat the options for the new-pssession (to make it easier to read)
-        $options = @{
-            'ConfigurationName' = 'Microsoft.Exchange'
-            'ConnectionUri' = 'https://outlook.office365.com/powershell-liveid/'
-            'Credential' = $credential
-            'Authentication' = 'Basic'
-            'AllowRedirection' = $true
-            'ErrorAction' = 'Stop'
+    [CmdletBinding()]
+    param(
+        [PSCredential]
+        $credential
+    )
+    process {
+        try {
+            if ($credential -eq $null) { $credential = Get-Credential }
+            # splat the options for the new-pssession (to make it easier to read)
+            $options = @{
+                'ConfigurationName' = 'Microsoft.Exchange'
+                'ConnectionUri' = 'https://outlook.office365.com/powershell-liveid/'
+                'Credential' = $credential
+                'Authentication' = 'Basic'
+                'AllowRedirection' = $true
+                'ErrorAction' = 'Stop'
+            }
+            $session = New-PSSession @options
+            Import-Module (Import-PSSession $session -AllowClobber) -Global
+        } catch  {
+            Write-Warning 'Unable to connect to Exchange'
+            throw $_
         }
-        $session = New-PSSession @options
-        Import-Module (Import-PSSession $session -AllowClobber) -Global
-    } catch  {
-        Write-Warning 'Unable to connect to Exchange'
-        throw $_
     }
 }
 
