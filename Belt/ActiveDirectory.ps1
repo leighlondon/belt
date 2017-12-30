@@ -6,9 +6,17 @@ Gets a computer object.
 Gets a computer object with the matching hostname from Active Directory.
 #>
 function Get-Computer {
-    param([String]$computer)
-    Get-ADComputer -Filter "Name -like '*$computer*'" -Properties CanonicalName |
-        Select-Object Name,Enabled,CanonicalName
+    [CmdletBinding()]
+    param([String]$Computer)
+    process {
+        try {
+            Get-ADComputer -Filter "Name -like '*$Computer*'" -Properties CanonicalName |
+                Select-Object Name,Enabled,CanonicalName
+        } catch {
+            'Computer not found: ' + $Computer | Write-Warning
+            throw $_
+        }
+    }
 }
 
 <#
@@ -21,13 +29,15 @@ Active Directory group.
 #>
 function Get-GroupMembers {
     param([String]$group)
-    try {
-        Get-ADGroupMember -Identity $group -Recursive |
-            Get-ADUser -Property DisplayName |
-            Select-Object Name,DisplayName
-    } catch {
-        'Group not found: ' + $group | Write-Warning
-        throw $_
+    process {
+        try {
+            Get-ADGroupMember -Identity $group -Recursive |
+                Get-ADUser -Property DisplayName |
+                Select-Object Name,DisplayName
+        } catch {
+            'Group not found: ' + $group | Write-Warning
+            throw $_
+        }
     }
 }
 
