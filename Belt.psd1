@@ -5,7 +5,7 @@ RootModule = 'Belt.psm1'
 Description = 'A belt for handy tools.'
 
 # Version number of this module.
-ModuleVersion = '0.2.0'
+ModuleVersion = '0.2.1'
 
 # Minimum PowerShell version.
 PowerShellVersion = '5.0'
@@ -19,6 +19,7 @@ Author = 'Leigh London'
 # Functions to export from this module
 FunctionsToExport = @(
     # Active Directory
+    'Get-Computer',
     'Get-GroupMembers',
     'Get-MailboxType',
     'Resolve-MailboxType',
