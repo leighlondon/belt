@@ -28,14 +28,23 @@ Gets the "Name" and "DisplayName" properties for all members in a given
 Active Directory group.
 #>
 function Get-GroupMembers {
-    param([String]$group)
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [String]
+        $Group
+    )
     process {
+        $gn = @{
+            'Name' = 'Group'
+            'Expression' = { $group }
+        }
         try {
-            Get-ADGroupMember -Identity $group -Recursive |
+            Get-ADGroupMember -Identity $Group -Recursive |
                 Get-ADUser -Property DisplayName |
-                Select-Object Name,DisplayName
+                Select-Object $gn,Name,DisplayName
         } catch {
-            'Group not found: ' + $group | Write-Warning
+            'Group not found: ' + $Group | Write-Warning
             throw $_
         }
     }
