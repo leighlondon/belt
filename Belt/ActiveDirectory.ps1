@@ -35,14 +35,14 @@ function Get-GroupMembers {
         $Group
     )
     process {
-        $gn = @{
+        $GroupColumn = @{
             'Name' = 'Group'
             'Expression' = { $group }
         }
         try {
             Get-ADGroupMember -Identity $Group -Recursive |
                 Get-ADUser -Property DisplayName |
-                Select-Object $gn,Name,DisplayName
+                Select-Object $GroupColumn,Name,DisplayName
         } catch {
             'Group not found: ' + $Group | Write-Warning
             throw $_
