@@ -5,7 +5,7 @@ RootModule = 'Belt.psm1'
 Description = 'A belt for handy tools.'
 
 # Version number of this module.
-ModuleVersion = '0.2.3'
+ModuleVersion = '0.2.4'
 
 # Minimum PowerShell version.
 PowerShellVersion = '5.0'
@@ -33,7 +33,8 @@ FunctionsToExport = @(
     'ConvertTo-SID',
     'Remove-NetworkPrinters',
     # Meta helpers
-    'Get-FunctionSource'
+    'Get-FunctionSource',
+    'Publish-BeltModule'
 )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess
