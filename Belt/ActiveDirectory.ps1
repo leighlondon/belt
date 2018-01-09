@@ -37,7 +37,7 @@ function Get-GroupMembers {
     process {
         $GroupColumn = @{
             'Name' = 'Group'
-            'Expression' = { $group }
+            'Expression' = { $Group }
         }
         try {
             Get-ADGroupMember -Identity $Group -Recursive |
