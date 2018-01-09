@@ -8,26 +8,27 @@ Returns the ForwardingAddress and ForwardingSmtpAddress for a mailbox forward.
 function Get-MailboxForwards {
     [CmdletBinding()]
     param(
-        [parameter(mandatory=$true)]
+        [Parameter(Mandatory=$TRUE)]
         [String]
-        $mailbox
+        $Mailbox
     )
     begin { Test-ExchangeConnection }
     process {
-        Get-Mailbox -Mailbox $mailbox |
+        Get-Mailbox -Mailbox $Mailbox |
             Select-Object -Property ForwardingAddress,ForwardingSmtpAddress
     }
 }
 
 function Get-MailboxRules {
+    [CmdletBinding()]
     param(
-        [parameter(mandatory=$true)]
+        [Parameter(Mandatory=$TRUE)]
         [String]
-        $mailbox
+        $Mailbox
     )
     begin { Test-ExchangeConnection }
     process {
-        Get-InboxRule -Mailbox $mailbox |
+        Get-InboxRule -Mailbox $Mailbox |
             Select-Object -Property Name,ForwardTo,RedirectTo
     }
 }
@@ -44,22 +45,22 @@ function Connect-ExchangeOnlineSession {
     [CmdletBinding()]
     param(
         [PSCredential]
-        $credential
+        $Credential
     )
     process {
         try {
-            if ($credential -eq $null) { $credential = Get-Credential }
+            if ($Credential -eq $null) { $Credential = Get-Credential }
             # splat the options for the new-pssession (to make it easier to read)
-            $options = @{
+            $Options = @{
                 'ConfigurationName' = 'Microsoft.Exchange'
                 'ConnectionUri' = 'https://outlook.office365.com/powershell-liveid/'
-                'Credential' = $credential
+                'Credential' = $Credential
                 'Authentication' = 'Basic'
                 'AllowRedirection' = $true
                 'ErrorAction' = 'Stop'
             }
-            $session = New-PSSession @options
-            Import-Module (Import-PSSession $session -AllowClobber) -Global
+            $Session = New-PSSession @Options
+            Import-Module (Import-PSSession $Session -AllowClobber) -Global
         } catch  {
             Write-Warning 'Unable to connect to Exchange'
             throw $_
@@ -75,15 +76,18 @@ Disconnects from (all) Exchange Online remote session(s).
 Disconnects any remote PSSession(s) from the Exchange Online service (Office365).
 #>
 function Disconnect-ExchangeOnlineSessions {
-    Get-PSSession |
-        where { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' } |
-        Remove-PSSession
+    [CmdletBinding()]
+    process {
+        Get-PSSession |
+            where { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' } |
+            Remove-PSSession
+    }
 }
 
 function Test-ExchangeConnection {
     # test for a valid connection to exchange by looking for a cmdlet.
-    $exists = [bool](Get-Command -Name Check-MailboxQuotas -ErrorAction SilentlyContinue)
-    if ($exists -eq $false) {
+    $Exists = [bool](Get-Command -Name Check-MailboxQuotas -ErrorAction SilentlyContinue)
+    if ($Exists -eq $FALSE) {
         Write-Warning 'Not connected to Exchange'
         throw 'Not connected to Exchange'
     }

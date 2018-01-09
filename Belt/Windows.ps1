@@ -8,15 +8,15 @@ Convert an input username into a full length SID, both on a domain and locally.
 function ConvertTo-SID {
     [CmdletBinding()]
     param(
-        [parameter(mandatory=$TRUE)]
+        [Parameter(Mandatory=$TRUE)]
         [String]
-        $username
+        $Username
     )
     process {
         try {
-            $u = New-Object System.Security.Principal.NTAccount($username)
-            $sid = $u.Translate([System.Security.Principal.SecurityIdentifier])
-            $sid.Value
+            $User = New-Object System.Security.Principal.NTAccount($Username)
+            $SID = $User.Translate([System.Security.Principal.SecurityIdentifier])
+            $SID.Value
         }
         catch {
             Write-Warning $_
@@ -32,11 +32,13 @@ Removes all "network" printers.
 Removes any and all printer mappings for the current user that are not "local".
 #>
 function Remove-NetworkPrinters {
+    [CmdletBinding()]
     param(
-        [parameter()]
-        [String]$except
+        [Parameter()]
+        [String]
+        $Except
     )
     Get-Printer |
-        where { $_.Type -ne "Local" -and $_.Name -notlike "*$except*" } |
+        where { $_.Type -ne "Local" -and $_.Name -notlike "*$Except*" } |
         Remove-Printer
 }

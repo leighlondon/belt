@@ -6,10 +6,14 @@ Gets the source scriptblock for a function.
 This is a helper to show you the source (main script block) of a given function.
 #>
 function Get-FunctionSource {
-    param([string]$func)
+    [CmdletBinding()]
+    param(
+        [String]
+        $Func
+    )
     try {
-        (Get-ChildItem function:$func -ErrorAction Stop).Definition
+        (Get-ChildItem function:$Func -ErrorAction Stop).Definition
     } catch [System.Management.Automation.ActionPreferenceStopException] {
-        'Function not found: ' + $func | Write-Warning
+        'Function not found: ' + $Func | Write-Warning
     }
 }

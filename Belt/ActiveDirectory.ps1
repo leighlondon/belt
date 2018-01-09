@@ -7,7 +7,11 @@ Gets a computer object with the matching hostname from Active Directory.
 #>
 function Get-Computer {
     [CmdletBinding()]
-    param([String]$Computer)
+    param(
+        [Parameter(ValueFromPipeline)]
+        [String]
+        $Computer
+    )
     process {
         try {
             Get-ADComputer -Filter "Name -like '*$Computer*'" -Properties CanonicalName |
@@ -59,21 +63,26 @@ Checks the Active Directory attributes for a given user and translates the
 mailbox type into a human-readable form.
 #>
 function Get-MailboxType {
-    param([string]$username)
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [String]
+        $Username
+    )
     begin {
-        $type = @{
+        $MailboxType = @{
             'Name' = 'Mailbox Type'
             'Expression' = { Resolve-MailboxType $_.msExchRemoteRecipientType }
         }
     }
     process {
         try {
-            Get-ADUser $username -Properties msExchRemoteRecipientType |
-                Select-Object Name, $type
+            Get-ADUser $Username -Properties msExchRemoteRecipientType |
+                Select-Object Name, $MailboxType
         } catch [System.Management.Automation.CommandNotFoundException] {
             'Missing ActiveDirectory module' | Write-Warning
         } catch {
-            'Not found: ' + $username | Write-Warning
+            'Not found: ' + $Username | Write-Warning
         }
     }
 }
@@ -86,24 +95,33 @@ Resolve the numeric mailbox type to a string.
 Returns a human-readable string translation of the msExchRemoteRecipientType prop.
 #>
 function Resolve-MailboxType {
-    param([Int64]$mbox)
-    $types = @{
-        1='ProvisionedCloudMailbox'
-        2='ProvisionedCloudArchive'
-        4='MigratedMailbox'
-        8='DeprovisionedMailbox'
-        16='DeprovisionedArchive'
-        32='RoomMailbox'
-        64='EquipmentMailbox'
-        96='SharedMailbox'
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [Int]
+        $Mailbox
+    )
+    begin {
+        $MailboxTypes = @{
+             1='ProvisionedCloudMailbox'
+             2='ProvisionedCloudArchive'
+             4='MigratedMailbox'
+             8='DeprovisionedMailbox'
+            16='DeprovisionedArchive'
+            32='RoomMailbox'
+            64='EquipmentMailbox'
+            96='SharedMailbox'
+        }
     }
-    # use a dynamic type as temporary storage
-    $result = [System.Collections.ArrayList]@()
-    $types.Keys |
-        # bitwise operations to decode the type
-        where { $mbox -band $_ } |
-        # swallow the return value
-        foreach { $_ = $result.Add($types.Get_Item($_)) }
-    # returns a human-readable single string
-    $result -Join ', '
+    process {
+        # use a dynamic type as temporary storage
+        $Result = [System.Collections.ArrayList]@()
+        $MailboxTypes.Keys |
+            # bitwise operations to decode the type
+            where { $Mailbox -bAnd $_ } |
+            # swallow the return value
+            foreach { $_ = $Result.Add($MailboxTypes.Get_Item($_)) }
+        # returns a human-readable single string
+        $Result -Join ', '
+    }
 }
