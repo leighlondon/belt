@@ -17,3 +17,13 @@ function Get-FunctionSource {
         'Function not found: ' + $Func | Write-Warning
     }
 }
+
+function Publish-BeltModule {
+    param(
+        [String]
+        $Repo
+    )
+    Get-Module Belt |
+        Select @{'Name'="Path";'Expression'={$_.ModuleBase}} |
+        Publish-Module -Confirm -Repository $Repo
+}
