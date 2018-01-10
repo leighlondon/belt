@@ -12,10 +12,16 @@ function Get-MailboxForwards {
         [String]
         $Mailbox
     )
-    begin { Test-ExchangeConnection }
+    begin {
+        Test-ExchangeConnection
+        $MailboxColumn = @{
+            'Name' = 'Mailbox'
+            'Expression' = { $Mailbox }
+        }
+    }
     process {
         Get-Mailbox -Identity $Mailbox |
-            Select-Object -Property ForwardingAddress,ForwardingSmtpAddress
+            Select-Object -Property $MailboxColumn,ForwardingAddress,ForwardingSmtpAddress
     }
 }
 
@@ -26,10 +32,16 @@ function Get-MailboxRules {
         [String]
         $Mailbox
     )
-    begin { Test-ExchangeConnection }
+    begin {
+        Test-ExchangeConnection
+        $MailboxColumn = @{
+            'Name' = 'Mailbox'
+            'Expression' = { $Mailbox }
+        }
+    }
     process {
         Get-InboxRule -Mailbox $Mailbox |
-            Select-Object -Property Name,ForwardTo,RedirectTo
+            Select-Object -Property $MailboxColumn,Name,ForwardTo,RedirectTo
     }
 }
 
