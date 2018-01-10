@@ -24,6 +24,6 @@ function Publish-BeltModule {
         $Repo
     )
     Get-Module Belt |
-        Select @{'Name'="Path";'Expression'={$_.ModuleBase}} |
+        Select-Object @{'Name'='Path';'Expression'={$_.ModuleBase}} |
         Publish-Module -Confirm -Repository $Repo
 }
