@@ -5,7 +5,7 @@ RootModule = 'Belt.psm1'
 Description = 'A belt for handy tools.'
 
 # Version number of this module.
-ModuleVersion = '0.2.4'
+ModuleVersion = '0.2.5'
 
 # Minimum PowerShell version.
 PowerShellVersion = '5.0'
