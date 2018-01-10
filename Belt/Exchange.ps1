@@ -78,16 +78,17 @@ Disconnects any remote PSSession(s) from the Exchange Online service (Office365)
 function Disconnect-ExchangeOnlineSessions {
     [CmdletBinding()]
     process {
-        Get-PSSession |
-            where { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' } |
-            Remove-PSSession
+        Get-ExchangeOnlineSessions | Remove-PSSession
     }
 }
 
+function Get-ExchangeOnlineSessions {
+    Get-PSSession |
+        where { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' }
+}
+
 function Test-ExchangeConnection {
-    # test for a valid connection to exchange by looking for a cmdlet.
-    $Exists = [bool](Get-Command -Name Check-MailboxQuotas -ErrorAction SilentlyContinue)
-    if ($Exists -eq $FALSE) {
+    if ((Get-ExchangeOnlineSessions | Measure).Count -gt 0) {
         Write-Warning 'Not connected to Exchange'
         throw 'Not connected to Exchange'
     }
