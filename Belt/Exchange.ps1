@@ -14,7 +14,7 @@ function Get-MailboxForwards {
     )
     begin { Test-ExchangeConnection }
     process {
-        Get-Mailbox -Mailbox $Mailbox |
+        Get-Mailbox -Identity $Mailbox |
             Select-Object -Property ForwardingAddress,ForwardingSmtpAddress
     }
 }
@@ -76,19 +76,16 @@ Disconnects from (all) Exchange Online remote session(s).
 Disconnects any remote PSSession(s) from the Exchange Online service (Office365).
 #>
 function Disconnect-ExchangeOnlineSessions {
-    [CmdletBinding()]
-    process {
-        Get-ExchangeOnlineSessions | Remove-PSSession
-    }
+    Get-ExchangeOnlineSessions | Remove-PSSession
 }
 
 function Get-ExchangeOnlineSessions {
     Get-PSSession |
-        where { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' }
+        Where-Object { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' }
 }
 
 function Test-ExchangeConnection {
-    if ((Get-ExchangeOnlineSessions | Measure).Count -gt 0) {
+    if ((Get-ExchangeOnlineSessions | Measure-Object).Count -lt 1) {
         Write-Warning 'Not connected to Exchange'
         throw 'Not connected to Exchange'
     }
