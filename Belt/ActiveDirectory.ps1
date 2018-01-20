@@ -95,7 +95,6 @@ Resolve the numeric mailbox type to a string.
 Returns a human-readable string translation of the msExchRemoteRecipientType prop.
 #>
 function Resolve-MailboxType {
-    [CmdletBinding()]
     param(
         [Parameter(ValueFromPipeline)]
         [Int]

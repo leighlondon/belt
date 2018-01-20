@@ -25,6 +25,13 @@ function Get-MailboxForwards {
     }
 }
 
+<#
+.SYNOPSIS
+List the rules linked to a mailbox.
+
+.DESCRIPTION
+Lists all rules on a mailbox, and displays the ForwardTo or RedirectTo fields.
+#>
 function Get-MailboxRules {
     [CmdletBinding()]
     param(
