@@ -20,7 +20,7 @@ Author = 'Leigh London'
 FunctionsToExport = @(
     # Active Directory
     'Get-Computer',
-    'Get-GroupMembers',
+    'Get-GroupMember',
     'Get-MailboxType',
     'Resolve-MailboxType',
     # DNS

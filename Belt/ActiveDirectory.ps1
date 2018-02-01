@@ -31,7 +31,7 @@ Gets a list of group members.
 Gets the "Name" and "DisplayName" properties for all members in a given
 Active Directory group.
 #>
-function Get-GroupMembers {
+function Get-GroupMember {
     [CmdletBinding()]
     param(
         [Parameter(ValueFromPipeline)]
@@ -117,9 +117,9 @@ function Resolve-MailboxType {
         $Result = [System.Collections.ArrayList]@()
         $MailboxTypes.Keys |
             # bitwise operations to decode the type
-            where { $Mailbox -bAnd $_ } |
+            Where-Object { $Mailbox -bAnd $_ } |
             # swallow the return value
-            foreach { $_ = $Result.Add($MailboxTypes.Get_Item($_)) }
+            ForEach-Object { $_ = $Result.Add($MailboxTypes.Get_Item($_)) }
         # returns a human-readable single string
         $Result -Join ', '
     }
