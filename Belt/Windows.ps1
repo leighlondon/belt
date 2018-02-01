@@ -32,13 +32,15 @@ Removes all "network" printers.
 Removes any and all printer mappings for the current user that are not "local".
 #>
 function Remove-NetworkPrinters {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$True)]
     param(
         [Parameter()]
         [String]
         $Except
     )
-    Get-Printer |
-        where { $_.Type -ne "Local" -and $_.Name -notlike "*$Except*" } |
-        Remove-Printer
+    if ($PSCmdlet.ShouldProcess("Removing printers except $Except")) {
+        Get-Printer |
+            Where-Object { $_.Type -ne "Local" -and $_.Name -notlike "*$Except*" } |
+            Remove-Printer
+    }
 }
