@@ -27,8 +27,8 @@ FunctionsToExport = @(
     'Resolve-DNS',
     # Exchange
     'Connect-ExchangeOnlineSession',
-    'Disconnect-ExchangeOnlineSessions',
-    'Get-MailboxForwards',
+    'Disconnect-ExchangeOnlineSession',
+    'Get-MailboxForward',
     # Windows
     'ConvertTo-SID',
     'Remove-NetworkPrinters',

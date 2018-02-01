@@ -1,11 +1,11 @@
 <#
 .SYNOPSIS
-List the forwards active on a mailbox.
+List the forward(s) active on a mailbox.
 
 .DESCRIPTION
 Returns the ForwardingAddress and ForwardingSmtpAddress for a mailbox forward.
 #>
-function Get-MailboxForwards {
+function Get-MailboxForward {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$TRUE)]
@@ -27,12 +27,12 @@ function Get-MailboxForwards {
 
 <#
 .SYNOPSIS
-List the rules linked to a mailbox.
+List the rule(s) linked to a mailbox.
 
 .DESCRIPTION
 Lists all rules on a mailbox, and displays the ForwardTo or RedirectTo fields.
 #>
-function Get-MailboxRules {
+function Get-MailboxRule {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$TRUE)]
@@ -94,17 +94,17 @@ Disconnects from (all) Exchange Online remote session(s).
 .DESCRIPTION
 Disconnects any remote PSSession(s) from the Exchange Online service (Office365).
 #>
-function Disconnect-ExchangeOnlineSessions {
-    Get-ExchangeOnlineSessions | Remove-PSSession
+function Disconnect-ExchangeOnlineSession {
+    Get-ExchangeOnlineSession | Remove-PSSession
 }
 
-function Get-ExchangeOnlineSessions {
+function Get-ExchangeOnlineSession {
     Get-PSSession |
         Where-Object { $_.ComputerName -eq 'outlook.office365.com' -and $_.ConfigurationName -eq 'Microsoft.Exchange' }
 }
 
 function Test-ExchangeConnection {
-    if ((Get-ExchangeOnlineSessions | Measure-Object).Count -lt 1) {
+    if ((Get-ExchangeOnlineSession | Measure-Object).Count -lt 1) {
         Write-Warning 'Not connected to Exchange'
         throw 'Not connected to Exchange'
     }
