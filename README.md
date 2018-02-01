@@ -19,8 +19,15 @@ Import-Module Belt
 
 Belt works best when it's added to automatically load into your PowerShell session.
 Add these lines to `Documents\profile.ps1`:
-
 ```powershell
 Import-Module Belt
 Set-Location $env:USERPROFILE
+```
+
+## help
+
+Most exported functions will have help documentation.
+To view the help for `Get-FunctionSource` for example:
+```powershell
+help Get-FunctionSource
 ```
