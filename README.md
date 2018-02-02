@@ -18,7 +18,7 @@ Import-Module Belt
 ## profile
 
 Belt works best when it's added to automatically load into your PowerShell session.
-Add these lines to `Documents\profile.ps1`:
+Add these lines to `Documents\WindowsPowerShell\profile.ps1`:
 ```powershell
 Import-Module Belt
 Set-Location $env:USERPROFILE
