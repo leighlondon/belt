@@ -87,6 +87,30 @@ function Get-MailboxType {
     }
 }
 
+function Get-User {
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [String]
+        $Username
+    )
+    process {
+        Get-ADUser $Username -Properties *
+    }
+}
+
+function Get-UserFromEmail {
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [String]
+        $Email
+    )
+    process {
+        Get-ADUser -Filter "UserPrincipalName -like '$Email'" -Properties *
+    }
+}
+
 <#
 .SYNOPSIS
 Resolve the numeric mailbox type to a string.
