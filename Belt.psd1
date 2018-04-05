@@ -5,7 +5,7 @@ RootModule = 'Belt.psm1'
 Description = 'A belt for handy tools.'
 
 # Version number of this module.
-ModuleVersion = '0.4.0'
+ModuleVersion = '0.5.0'
 
 # Minimum PowerShell version.
 PowerShellVersion = '5.0'
@@ -22,7 +22,11 @@ FunctionsToExport = @(
     'Get-Computer',
     'Get-GroupMember',
     'Get-MailboxType',
+    'Get-User',
+    'Get-UserFromEmail',
     'Resolve-MailboxType',
+    # Azure AD
+    'Get-AzureUser',
     # DNS
     'Resolve-DNS',
     # Exchange
@@ -33,6 +37,7 @@ FunctionsToExport = @(
     'ConvertTo-SID',
     'Remove-NetworkPrinters',
     # Meta helpers
+    'ConvertFrom-FileTime',
     'Get-FunctionSource'
 )
 
