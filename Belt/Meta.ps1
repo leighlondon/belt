@@ -17,3 +17,11 @@ function Get-FunctionSource {
         'Function not found: ' + $Func | Write-Warning
     }
 }
+
+function ConvertFrom-FileTime {
+    param(
+        [Long]
+        $ft
+    )
+    [DateTime]::FromFileTimeUtc($ft)
+}
