@@ -21,7 +21,7 @@ function Get-FunctionSource {
 function ConvertFrom-FileTime {
     param(
         [Long]
-        $ft
+        $Time
     )
-    [DateTime]::FromFileTimeUtc($ft)
+    [DateTime]::FromFileTime($Time)
 }
