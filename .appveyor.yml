@@ -1,0 +1,2 @@
+test_script:
+- ps: .\Scripts\Test.ps1
