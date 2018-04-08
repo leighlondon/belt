@@ -1,2 +1,4 @@
+os: WMF 5
+build: false
 test_script:
 - ps: .\Scripts\Test.ps1
