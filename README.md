@@ -1,5 +1,7 @@
 # belt
 
+[![Build status](https://ci.appveyor.com/api/projects/status/k89duahkyi2tev65?svg=true)](https://ci.appveyor.com/project/leighlondon/belt)
+
 A belt for handy tools.
 
 ## install
