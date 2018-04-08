@@ -1,5 +1,7 @@
 os: WMF 5
 build: false
+install:
+- ps: Install-PackageProvider -Name NuGet -Force
 before_test:
 - ps: Install-Module Pester -Force -SkipPublisherCheck
 test_script:
