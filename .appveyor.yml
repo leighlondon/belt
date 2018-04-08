@@ -1,4 +1,6 @@
 os: WMF 5
 build: false
+before_test:
+- ps: Install-Module Pester -Force -SkipPublisherCheck
 test_script:
-- ps: .\Scripts\Test.ps1
+- ps: Invoke-Pester -Path ".\Tests"
