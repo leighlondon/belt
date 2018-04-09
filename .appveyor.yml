@@ -8,4 +8,9 @@ install:
 before_test:
 - ps: Install-Module Pester -Force -SkipPublisherCheck
 test_script:
-- ps: Invoke-Pester -Path ".\Tests"
+- ps: |
+    $results = ".\TestsResults.xml"
+    $res = Invoke-Pester -OutputFormat NUnitXml -OutputFile $testResultsFile -PassThru
+    $wc = New-Object 'System.Net.WebClient'
+    $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $results))
+    if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed." }
