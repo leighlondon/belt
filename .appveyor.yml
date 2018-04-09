@@ -1,5 +1,8 @@
 os: WMF 5
 build: false
+environment:
+  DeployKey:
+    secure: JTKgh7ZbOD951Rg/loeImMQSooAILaNOO+O7zBSqixBGQ5PpbAbdXkRcNhe0ZWpK
 install:
 - ps: Install-PackageProvider -Name NuGet -Force
 before_test:
