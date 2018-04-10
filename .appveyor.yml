@@ -9,3 +9,5 @@ before_test:
 - ps: Install-Module Pester -Force -SkipPublisherCheck
 test_script:
 - ps: .\Scripts\Test.ps1
+deploy_script:
+- ps: .\Scripts\Deploy.ps1
