@@ -9,5 +9,5 @@ if ($env:APPVEYOR_REPO_TAG -ne $true) {
     }
     Expand-Archive @ZipParams
     Import-Module Belt
-    Publish-Module -Name 'Belt' -NuGetApiKey $env:NuGetApiKey -Verbose
+    Publish-Module -Name 'Belt' -NuGetApiKey $env:DeployKey -Verbose
 }

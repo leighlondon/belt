@@ -1,10 +1,11 @@
 os: WMF 5
-build: false
 environment:
   DeployKey:
     secure: JTKgh7ZbOD951Rg/loeImMQSooAILaNOO+O7zBSqixBGQ5PpbAbdXkRcNhe0ZWpK
 install:
 - ps: Install-PackageProvider -Name NuGet -Force
+build_script:
+- ps: .\Scripts\Build.ps1
 before_test:
 - ps: Install-Module Pester -Force -SkipPublisherCheck
 test_script:
