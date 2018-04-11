@@ -6,6 +6,7 @@ if ($env:APPVEYOR_REPO_TAG -ne $true) {
     $ZipParams = @{
         Path = '.\Belt.zip'
         DestinationPath = "${$env:USERPROFILE}\Documents\WindowsPowerShell\Modules\Belt"
+        Verbose = $true
     }
     Expand-Archive @ZipParams
     Import-Module Belt
