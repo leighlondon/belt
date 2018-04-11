@@ -1,11 +1,14 @@
 if ($env:APPVEYOR_REPO_TAG -ne $true) {
-    Write-Host "not deploying, no tag"
+    Write-Information "not deploying, no tag"
     return
 } else {
+    $Manifest = Test-ModuleManifest '.\Belt.psd1'
+    $Version = $Manifest.Version
+    $ModulePath = $env:PSModulePath.Split(';')[0]
     # deploy since it's a tagged release.
     $ZipParams = @{
         Path = '.\Belt.zip'
-        DestinationPath = "${$env:USERPROFILE}\Documents\WindowsPowerShell\Modules\Belt"
+        DestinationPath = "$ModulePath\Belt\$Version"
         Verbose = $true
     }
     Expand-Archive @ZipParams
