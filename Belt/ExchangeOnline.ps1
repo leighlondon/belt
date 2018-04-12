@@ -54,6 +54,46 @@ function Get-MailboxRule {
 
 <#
 .SYNOPSIS
+Get the details of all teams containing $Team in their display name.
+
+.DESCRIPTION
+Wildcard search for all teams with the $Team parameter in their name.
+#>
+function Get-MicrosoftTeamDetail {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$TRUE)]
+        [String]
+        $Team
+    )
+    begin { Test-ExchangeConnection }
+    process {
+        Get-UnifiedGroup -Identity "*$Team*"
+    }
+}
+
+<#
+.SYNOPSIS
+Get the owners for a specific Microsoft Team.
+
+.DESCRIPTION
+For a provided Microsoft Teams team name, returns the list of all owners of that team.
+#>
+function Get-MicrosoftTeamOwner {
+    param(
+        [Parameter(Mandatory=$TRUE)]
+        [String]
+        $Team
+    )
+    begin { Test-ExchangeConnection }
+    process {
+        Get-UnifiedGroup -Identity $Team |
+            Select-Object -ExpandProperty ManagedBy   
+    }
+}
+
+<#
+.SYNOPSIS
 Connects to Exchange Online.
 
 .DESCRIPTION

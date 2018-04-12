@@ -33,6 +33,8 @@ FunctionsToExport = @(
     'Connect-ExchangeOnlineSession',
     'Disconnect-ExchangeOnlineSession',
     'Get-MailboxForward',
+    'Get-MicrosoftTeamDetail',
+    'Get-MicrosoftTeamOwner',
     # Helpers, or code touching more than one module.
     'Get-SpamVerificationDetails',
     # Windows
